@@ -34,14 +34,14 @@ public class ChamadoFechado extends Fragment {
 
             @Override
             public void onSuccess(String result) {
-                Toast.makeText(view.getContext(), "FECHADOS ", Toast.LENGTH_LONG).show();
+                Toast.makeText(view.getContext(), "CHAMADOS FECHADOS ", Toast.LENGTH_LONG).show();
 
                 Gson gson = new Gson();
 
-                FechadosChamados[] chamados = gson.fromJson(result, FechadosChamados[].class);
+                FechadosChamados[] chamadosFechados = gson.fromJson(result, FechadosChamados[].class);
 
-                for (FechadosChamados chamado: chamados){
-                    if(chamado.getStatus().toLowerCase().equals("fechado")){
+                for (FechadosChamados chamado: chamadosFechados){
+                    if(chamado.getStatus().toLowerCase().equals("chamadosfechado")){
 
                         chamadosListaFechados.add(chamado);
 

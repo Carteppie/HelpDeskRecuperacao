@@ -24,6 +24,7 @@ import es.senac.br.helpdesk.R;
 import es.senac.br.helpdesk_danieloaski.api.APIService;
 import es.senac.br.helpdesk_danieloaski.api.ApiUtils;
 import es.senac.br.helpdesk_danieloaski.model.Chamado;
+import es.senac.br.helpdesk_danieloaski.model.FechadosChamados;
 import es.senac.br.helpdesk_danieloaski.model.Status;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -51,7 +52,7 @@ public class TelaChamado extends AppCompatActivity {
 
              String mensagem = edtMensagem.getText().toString().trim();
 
-             Chamado chamado = new Chamado();
+             FechadosChamados chamado = new FechadosChamados();
              chamado.setDescricao(mensagem);
 
                 if (!TextUtils.isEmpty(mensagem)) {
@@ -63,7 +64,7 @@ public class TelaChamado extends AppCompatActivity {
         });
     }
 
-    public void enviarMensagem(Chamado chamado, final Context context) {
+    public void enviarMensagem(FechadosChamados fechadosChamados, final Context context) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -71,9 +72,10 @@ public class TelaChamado extends AppCompatActivity {
         mAPIService = ApiUtils.getService();
 
         Map<String, String> jsonParams = new ArrayMap<>();
-        jsonParams.put("descricao", chamado.getDescricao());
-        jsonParams.put("status", Status.FECHADO.toString());
+        jsonParams.put("descricao", fechadosChamados.getDescricao());
+        jsonParams.put("status", Status.CHAMADOSFECHADOS.toString());
         jsonParams.put("dataAbertura", dataAbertura.getTime()+"");
+        jsonParams.put("solucao", fechadosChamados.getSolucao());
 
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(jsonParams)).toString());
 

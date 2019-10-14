@@ -17,5 +17,12 @@ public enum Status {
             return "FECHADO";
         }
 
+    },
+    CHAMADOSFECHADOS{
+        @Override
+        public String toString(){
+            return "CHAMADOSFECHADO";
+        }
+
     }
 }
